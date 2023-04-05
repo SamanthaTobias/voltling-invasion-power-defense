@@ -88,7 +88,7 @@ public class GameScreen extends Screen {
 	private void progressGameTic(float delta) {
 		if (config.isDebugDrainLife()) {
 			timeSinceLastDrainLife += delta;
-			if (timeSinceLastDrainLife >= 1f) {
+			if (timeSinceLastDrainLife >= config.getGameTicMs()) {
 				lives -= config.getDebugDrainLifeAmount();
 				livesLabel.setText("Lives: " + lives);
 				timeSinceLastDrainLife = 0f;
