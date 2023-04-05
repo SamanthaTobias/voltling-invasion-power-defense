@@ -1,6 +1,6 @@
-package nl.samantatobias.voltling.screen;
+package nl.samanthatobias.voltling.screen;
 
-import nl.samantatobias.voltling.VoltlingGame;
+import nl.samanthatobias.voltling.VoltlingGame;
 
 public class GameScreen extends Screen {
 	public GameScreen(VoltlingGame game) {

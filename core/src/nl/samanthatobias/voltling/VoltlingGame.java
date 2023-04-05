@@ -1,7 +1,7 @@
-package nl.samantatobias.voltling;
+package nl.samanthatobias.voltling;
 
 import com.badlogic.gdx.Game;
-import nl.samantatobias.voltling.screen.MainMenuScreen;
+import nl.samanthatobias.voltling.screen.MainMenuScreen;
 
 public class VoltlingGame extends Game {
 	

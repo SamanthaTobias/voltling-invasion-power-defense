@@ -1,9 +1,10 @@
-package nl.samantatobias.voltling.client;
+package nl.samanthatobias.voltling.client;
+
+import nl.samanthatobias.voltling.VoltlingGame;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import nl.samantatobias.voltling.VoltlingGame;
 
 public class HtmlLauncher extends GwtApplication {
 

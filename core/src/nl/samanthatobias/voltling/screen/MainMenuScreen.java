@@ -1,10 +1,11 @@
-package nl.samantatobias.voltling.screen;
+package nl.samanthatobias.voltling.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import nl.samantatobias.voltling.VoltlingGame;
+
+import nl.samanthatobias.voltling.VoltlingGame;
 
 public class MainMenuScreen extends Screen {
 

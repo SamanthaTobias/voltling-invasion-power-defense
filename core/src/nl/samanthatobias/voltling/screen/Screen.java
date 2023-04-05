@@ -1,4 +1,4 @@
-package nl.samantatobias.voltling.screen;
+package nl.samanthatobias.voltling.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -6,7 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import nl.samantatobias.voltling.VoltlingGame;
+
+import nl.samanthatobias.voltling.VoltlingGame;
 
 public abstract class Screen extends ScreenAdapter {
 
