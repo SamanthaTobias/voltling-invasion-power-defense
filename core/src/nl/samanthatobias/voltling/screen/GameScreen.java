@@ -8,23 +8,27 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import nl.samanthatobias.voltling.VoltlingGame;
+import nl.samanthatobias.voltling.config.Config;
 
 public class GameScreen extends Screen {
 
+	private final Config config;
 	private final Label livesLabel;
 	private final TextButton playPauseButton;
 	private final TextButton exitButton;
 
+	private float timeSinceLastDrainLife = 0f;
 	private boolean isPlaying;
-	private int totalLives;
+	private int lives;
 
 	public GameScreen(final VoltlingGame game) {
 		super(game);
+		config = new Config();
 
 		Gdx.gl.glClearColor(0, 1, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		totalLives = 100;
+		lives = 100;
 
 		livesLabel = setupLivesLabel();
 		playPauseButton = setupPlayPauseButton();
@@ -33,7 +37,7 @@ public class GameScreen extends Screen {
 
 	private Label setupLivesLabel() {
 		final Label livesLabel;
-		livesLabel = new Label("Lives: " + totalLives, skin);
+		livesLabel = new Label("Lives: " + lives, skin);
 		livesLabel.setPosition(10, stage.getHeight() - livesLabel.getHeight() - 10);
 		stage.addActor(livesLabel);
 		return livesLabel;
@@ -46,7 +50,7 @@ public class GameScreen extends Screen {
 		exitButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.setScreen(new GameEndScreen(game, totalLives));
+				endGame();
 			}
 		});
 		stage.addActor(exitButton);
@@ -66,6 +70,34 @@ public class GameScreen extends Screen {
 		});
 		stage.addActor(playPauseButton);
 		return playPauseButton;
+	}
+
+	private void endGame() {
+		game.setScreen(new GameEndScreen(game, lives));
+	}
+
+	@Override
+	public void render(float delta) {
+		super.render(delta);
+
+		if (isPlaying) {
+			progressGameTic(delta);
+		}
+	}
+
+	private void progressGameTic(float delta) {
+		if (config.isDebugDrainLife()) {
+			timeSinceLastDrainLife += delta;
+			if (timeSinceLastDrainLife >= 1f) {
+				lives -= config.getDebugDrainLifeAmount();
+				livesLabel.setText("Lives: " + lives);
+				timeSinceLastDrainLife = 0f;
+			}
+		}
+
+		if (lives <= 0) {
+			endGame();
+		}
 	}
 
 }
