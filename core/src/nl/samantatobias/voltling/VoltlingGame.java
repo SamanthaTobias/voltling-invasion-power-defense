@@ -1,31 +1,13 @@
 package nl.samantatobias.voltling;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.Game;
+import nl.samantatobias.voltling.screen.MainMenuScreen;
 
-public class VoltlingGame extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+public class VoltlingGame extends Game {
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		setScreen(new MainMenuScreen(this));
 	}
 
-	@Override
-	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
-	}
-	
-	@Override
-	public void dispose () {
-		batch.dispose();
-		img.dispose();
-	}
 }

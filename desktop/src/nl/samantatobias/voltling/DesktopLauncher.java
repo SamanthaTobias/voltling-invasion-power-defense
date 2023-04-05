@@ -2,7 +2,6 @@ package nl.samantatobias.voltling;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import nl.samantatobias.voltling.VoltlingGame;
 
 public class DesktopLauncher {
 
