@@ -2,13 +2,16 @@ package nl.samanthatobias.voltling.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Array;
 
 import nl.samanthatobias.voltling.VoltlingGame;
 import nl.samanthatobias.voltling.config.Config;
+import nl.samanthatobias.voltling.voltling.Voltling;
 
 public class GameScreen extends Screen {
 
@@ -16,6 +19,7 @@ public class GameScreen extends Screen {
 	private final Label livesLabel;
 	private final TextButton playPauseButton;
 	private final TextButton exitButton;
+	private final Array<Voltling> voltlings;
 
 	private float timeSinceLastDrainLife = 0f;
 	private boolean isPlaying;
@@ -33,6 +37,9 @@ public class GameScreen extends Screen {
 		livesLabel = setupLivesLabel();
 		playPauseButton = setupPlayPauseButton();
 		exitButton = setupExitButton();
+
+		voltlings = new Array<>();
+		spawnLesserVoltling();
 	}
 
 	private Label setupLivesLabel() {
@@ -76,6 +83,12 @@ public class GameScreen extends Screen {
 		game.setScreen(new GameEndScreen(game, lives));
 	}
 
+	private void spawnLesserVoltling() {
+		Voltling lesserVoltling = new Voltling("Lesser Voltling", new Vector2(0, stage.getHeight() / 2), 1, 100, skin);
+		voltlings.add(lesserVoltling);
+		stage.addActor(lesserVoltling.getSprite());
+	}
+
 	@Override
 	public void render(float delta) {
 		super.render(delta);
@@ -89,15 +102,29 @@ public class GameScreen extends Screen {
 		if (config.isDebugDrainLife()) {
 			timeSinceLastDrainLife += delta;
 			if (timeSinceLastDrainLife >= config.getGameTicMs()) {
-				lives -= config.getDebugDrainLifeAmount();
-				livesLabel.setText("Lives: " + lives);
+				removeLives(config.getDebugDrainLifeAmount());
 				timeSinceLastDrainLife = 0f;
+			}
+		}
+
+		for (Voltling voltling : voltlings) {
+			float dx = delta * voltling.getSpeed();
+			voltling.updatePosition(dx, 0f);
+			if (voltling.getX() >= stage.getWidth()) {
+				removeLives(voltling.getPower());
+				voltling.getSprite().remove();
+				voltlings.removeValue(voltling, true);
 			}
 		}
 
 		if (lives <= 0) {
 			endGame();
 		}
+	}
+
+	private void removeLives(int delta) {
+		lives -= delta;
+		livesLabel.setText("Lives: " + lives);
 	}
 
 }
