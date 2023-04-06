@@ -1,9 +1,5 @@
 # Voltling Invasion: Power Defense
 
-## Running Voltling
-
-Make sure that `Voltling/core/assets` is the working directory of the project configuration.
-
 ## Acknowledgements
 
 This project uses the following third-party assets:
