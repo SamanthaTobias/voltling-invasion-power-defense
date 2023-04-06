@@ -27,10 +27,4 @@ public class Config {
 		return Integer.parseInt(properties.getProperty("debug.drainlife.amount", "1"));
 	}
 
-	public float getGameTicMs() {
-		// 1f = 1000ms
-		float ticMs = Float.parseFloat(properties.getProperty("game.tic.ms", "1000"));
-		return ticMs / 1000f;
-	}
-
 }

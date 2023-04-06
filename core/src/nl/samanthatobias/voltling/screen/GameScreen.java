@@ -101,8 +101,8 @@ public class GameScreen extends Screen {
 	private void progressGameTic(float delta) {
 		if (config.isDebugDrainLife()) {
 			timeSinceLastDrainLife += delta;
-			if (timeSinceLastDrainLife >= config.getGameTicMs()) {
-				removeLives(config.getDebugDrainLifeAmount());
+			if (timeSinceLastDrainLife >= 1f) {
+				removeLives(config.getDebugDrainLifeAmount() * (int) timeSinceLastDrainLife);
 				timeSinceLastDrainLife = 0f;
 			}
 		}
