@@ -27,4 +27,8 @@ public class Config {
 		return Integer.parseInt(properties.getProperty("debug.drainlife.amount", "1"));
 	}
 
+	public int getStartingLives() {
+		return Integer.parseInt(properties.getProperty("game.startinglives"));
+	}
+
 }
