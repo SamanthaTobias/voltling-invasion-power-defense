@@ -44,10 +44,17 @@ public class GameScreen extends Screen implements GameScreenActions {
 	@Override
 	public void render(float delta) {
 		super.render(delta);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		gameState.renderPath();
 
 		if (gameState.isPlaying()) {
 			progressGameTic(delta);
 		}
+
+		stage.act(delta);
+		stage.draw();
 	}
 
 	@Override
