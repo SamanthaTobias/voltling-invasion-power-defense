@@ -25,13 +25,11 @@ public class VoltlingManager {
 	public void spawnLesserVoltling() {
 		Voltling lesserVoltling = new Voltling("Lesser Voltling", new Vector2(0, stage.getHeight() / 2), 1, 100, skin);
 		voltlings.add(lesserVoltling);
-		stage.addActor(lesserVoltling.getSprite());
+		stage.addActor(lesserVoltling);
 	}
 
-	public void updateVoltlings(float delta) {
+	public void updateVoltlings() {
 		for (Voltling voltling : ArrayUtils.iterator(voltlings)) {
-			float dx = delta * voltling.getSpeed();
-			voltling.updatePosition(dx, 0f);
 			if (voltling.getX() >= stage.getWidth()) {
 				gameStateActions.removeLives(voltling.getPower());
 				voltling.getSprite().remove();

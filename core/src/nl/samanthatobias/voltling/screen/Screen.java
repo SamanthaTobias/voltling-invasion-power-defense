@@ -12,29 +12,29 @@ import nl.samanthatobias.voltling.VoltlingGame;
 public abstract class Screen extends ScreenAdapter {
 
 	protected final VoltlingGame game;
-	protected final Stage stage;
-	protected final Skin skin;
+	protected final Stage uiStage;
+	protected final Skin uiSkin;
 
 	public Screen(VoltlingGame game) {
 		this.game = game;
-		stage = new Stage(new ScreenViewport());
-		skin = new Skin(Gdx.files.internal( "skins/glassy/glassy-ui.json"));
+		uiStage = new Stage(new ScreenViewport());
+		uiSkin = new Skin(Gdx.files.internal( "skins/glassy/glassy-ui.json"));
 	}
 
 	@Override
 	public void show() {
-		Gdx.input.setInputProcessor(stage);
+		Gdx.input.setInputProcessor(uiStage);
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		stage.getViewport().update(width, height, true);
+		uiStage.getViewport().update(width, height, true);
 	}
 
 	@Override
 	public void dispose() {
-		stage.dispose();
-		skin.dispose();
+		uiStage.dispose();
+		uiSkin.dispose();
 	}
 
 	@Override
@@ -44,8 +44,8 @@ public abstract class Screen extends ScreenAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		// Update and draw the stage
-		stage.act(delta);
-		stage.draw();
+		uiStage.act(delta);
+		uiStage.draw();
 	}
 
 }

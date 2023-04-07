@@ -12,8 +12,8 @@ public class MainMenuScreen extends Screen {
 	public MainMenuScreen(final VoltlingGame game) {
 		super(game);
 
-		TextButton levelSelectButton = new TextButton("Level Select", skin);
-		levelSelectButton.setPosition(stage.getWidth() / 2 - levelSelectButton.getWidth() / 2, stage.getHeight() / 2);
+		TextButton levelSelectButton = new TextButton("Level Select", uiSkin);
+		levelSelectButton.setPosition(uiStage.getWidth() / 2 - levelSelectButton.getWidth() / 2, uiStage.getHeight() / 2);
 		levelSelectButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -21,8 +21,8 @@ public class MainMenuScreen extends Screen {
 			}
 		});
 
-		TextButton exitButton = new TextButton("Exit", skin);
-		exitButton.setPosition(stage.getWidth() / 2 - exitButton.getWidth() / 2, stage.getHeight() / 4);
+		TextButton exitButton = new TextButton("Exit", uiSkin);
+		exitButton.setPosition(uiStage.getWidth() / 2 - exitButton.getWidth() / 2, uiStage.getHeight() / 4);
 		exitButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -30,8 +30,8 @@ public class MainMenuScreen extends Screen {
 			}
 		});
 
-		stage.addActor(levelSelectButton);
-		stage.addActor(exitButton);
+		uiStage.addActor(levelSelectButton);
+		uiStage.addActor(exitButton);
 	}
 
 }

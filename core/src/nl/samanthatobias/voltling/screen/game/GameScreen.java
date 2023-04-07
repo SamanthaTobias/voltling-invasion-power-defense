@@ -1,8 +1,10 @@
 package nl.samanthatobias.voltling.screen.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import nl.samanthatobias.voltling.VoltlingGame;
@@ -16,20 +18,22 @@ public class GameScreen extends Screen implements GameScreenActions {
 	private final GameScreenUI gameScreenUI;
 	private final GameState gameState;
 	private final VoltlingManager voltlingManager;
+	private final Stage voltlingStage;
 
 	private float timeSinceLastDrainLife = 0f;
 
-	public GameScreen(final VoltlingGame game) {
+	public GameScreen(VoltlingGame game) {
 		super(game);
 		config = new Config();
 
-		Gdx.gl.glClearColor(0, 1, 0, 1);
+		Gdx.gl.glClearColor(0, 0.1f, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		int lives = config.getStartingLives();
 		gameState = new GameState(lives);
-		gameScreenUI = new GameScreenUI(this, stage, skin, lives);
-		voltlingManager = new VoltlingManager(gameState, stage, skin);
+		gameScreenUI = new GameScreenUI(this, uiStage, uiSkin, lives);
+		voltlingStage = new Stage();
+		voltlingManager = new VoltlingManager(gameState, voltlingStage, uiSkin);
 
 		voltlingManager.spawnLesserVoltling();
 
@@ -39,22 +43,25 @@ public class GameScreen extends Screen implements GameScreenActions {
 				endGame();
 			}
 		});
+
+		Gdx.input.setInputProcessor(new InputMultiplexer(uiStage, voltlingStage));
 	}
 
 	@Override
 	public void render(float delta) {
 		super.render(delta);
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 0.1f, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		gameState.renderPath();
 
 		if (gameState.isPlaying()) {
-			progressGameTic(delta);
+			gameLoop(delta);
 		}
+		voltlingStage.draw();
 
-		stage.act(delta);
-		stage.draw();
+		uiStage.act(delta);
+		uiStage.draw();
 	}
 
 	@Override
@@ -71,7 +78,7 @@ public class GameScreen extends Screen implements GameScreenActions {
 		gameScreenUI.updateLivesLabel(lives);
 	}
 
-	private void progressGameTic(float delta) {
+	private void gameLoop(float delta) {
 		if (config.isDebugDrainLife()) {
 			timeSinceLastDrainLife += delta;
 			if (timeSinceLastDrainLife >= 1f) {
@@ -80,7 +87,8 @@ public class GameScreen extends Screen implements GameScreenActions {
 			}
 		}
 
-		voltlingManager.updateVoltlings(delta);
+		voltlingStage.act(delta);
+		voltlingManager.updateVoltlings();
 
 		updateLivesLabel(gameState.getLives());
 

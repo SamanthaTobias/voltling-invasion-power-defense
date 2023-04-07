@@ -12,18 +12,18 @@ public class LevelSelectScreen extends Screen {
 	public LevelSelectScreen(final VoltlingGame game) {
 		super(game);
 
-		TextButton level1Button = new TextButton("Level 1", skin);
-		level1Button.setPosition(stage.getWidth() / 2 - level1Button.getWidth() / 2, stage.getHeight() / 2);
+		TextButton level1Button = new TextButton("Level 1", uiSkin);
+		level1Button.setPosition(uiStage.getWidth() / 2 - level1Button.getWidth() / 2, uiStage.getHeight() / 2);
 		level1Button.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				game.setScreen(new GameScreen(game));
 			}
 		});
-		stage.addActor(level1Button);
+		uiStage.addActor(level1Button);
 
-		TextButton backButton = new TextButton("Back", skin);
-		backButton.setPosition(10, stage.getHeight() - backButton.getHeight() - 10);
+		TextButton backButton = new TextButton("Back", uiSkin);
+		backButton.setPosition(10, uiStage.getHeight() - backButton.getHeight() - 10);
 		backButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -31,7 +31,7 @@ public class LevelSelectScreen extends Screen {
 			}
 		});
 
-		stage.addActor(backButton);
+		uiStage.addActor(backButton);
 	}
 
 }
