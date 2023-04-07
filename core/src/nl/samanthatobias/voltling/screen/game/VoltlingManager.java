@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 
+import nl.samanthatobias.voltling.utils.ArrayUtils;
 import nl.samanthatobias.voltling.voltling.Voltling;
 
 public class VoltlingManager {
@@ -28,7 +29,7 @@ public class VoltlingManager {
 	}
 
 	public void updateVoltlings(float delta) {
-		for (Voltling voltling : new Array.ArrayIterator<>(voltlings)) {
+		for (Voltling voltling : ArrayUtils.iterator(voltlings)) {
 			float dx = delta * voltling.getSpeed();
 			voltling.updatePosition(dx, 0f);
 			if (voltling.getX() >= stage.getWidth()) {
