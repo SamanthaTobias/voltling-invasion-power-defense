@@ -9,7 +9,7 @@ public class Path {
 
 	private final Array<Vector2> points;
 
-	public Path(Array<Vector2> points) {
+	Path(Array<Vector2> points) {
 		this.points = points;
 	}
 
