@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 
 import nl.samanthatobias.voltling.level.PathActions;
@@ -22,19 +21,13 @@ public class Voltling extends Actor {
 
 	private int pathIndex = 0;
 
-	public Voltling(PathActions pathActions, String name, int power, int speed, Skin skin) {
+	public Voltling(PathActions pathActions, String name, int power, int speed, Label sprite) {
 		this.pathActions = pathActions;
 		setName(name);
 		this.position = pathActions.getStartPoint();
-		this.sprite = createSprite(name, skin);
+		this.sprite = sprite;
 		this.power = power;
 		this.speed = speed;
-	}
-
-	private Label createSprite(String name, Skin skin) {
-		Label sprite = new Label(name, skin);
-		sprite.setPosition(position.x, position.y);
-		return sprite;
 	}
 
 	@Override

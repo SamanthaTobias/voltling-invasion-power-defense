@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group 'nl.samantha'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':core') // This line ensures that the test module can access classes from the core module
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testImplementation 'org.mockito:mockito-core:5.2.0'
+    testImplementation 'org.mockito:mockito-inline:5.2.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+    testImplementation 'com.badlogicgames.gdx:gdx:1.10.0'
+}
+
+test {
+    useJUnitPlatform()
+}
