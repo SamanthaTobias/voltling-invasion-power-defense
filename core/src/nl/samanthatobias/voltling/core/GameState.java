@@ -19,7 +19,7 @@ public class GameState implements GameStateActions {
 		if (delta <= 0) {
 			throw new IllegalArgumentException("Must remove positive number of lives");
 		}
-		log.info("Lost " + delta + " lives.");
+		log.info("Lost {} lives.", delta);
 		lives -= delta;
 	}
 
