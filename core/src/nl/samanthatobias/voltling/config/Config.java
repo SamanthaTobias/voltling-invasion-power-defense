@@ -1,34 +1,34 @@
 package nl.samanthatobias.voltling.config;
 
-import java.io.IOException;
-import java.util.Properties;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
 
 public class Config {
 
-	private final Properties properties;
+	private final int startingLives;
+	private final boolean debugDrainLife;
+	private final int debugDrainLifeAmount;
 
 	public Config() {
-		properties = new Properties();
-		try {
-			properties.load(Gdx.files.internal("config/config.properties").reader());
-		} catch (IOException e) {
-			throw new GdxRuntimeException("Error loading config.properties", e);
-		}
+		JsonReader reader = new JsonReader();
+		JsonValue json = reader.parse(Gdx.files.internal("config/config.json"));
+
+		startingLives = json.getInt("startingLives");
+		debugDrainLife = json.getBoolean("debugDrainLife");
+		debugDrainLifeAmount = json.getInt("debugDrainLifeAmount");
 	}
 
 	public boolean isDebugDrainLife() {
-		return Boolean.parseBoolean(properties.getProperty("debug.drainlife", "false"));
+		return debugDrainLife;
 	}
 
 	public int getDebugDrainLifeAmount() {
-		return Integer.parseInt(properties.getProperty("debug.drainlife.amount", "1"));
+		return debugDrainLifeAmount;
 	}
 
 	public int getStartingLives() {
-		return Integer.parseInt(properties.getProperty("game.startinglives"));
+		return startingLives;
 	}
 
 }
