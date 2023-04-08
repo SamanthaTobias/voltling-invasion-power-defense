@@ -6,11 +6,11 @@ import com.badlogic.gdx.utils.JsonValue;
 
 public class Config {
 
-	private final int startingLives;
-	private final boolean debugDrainLife;
-	private final int debugDrainLifeAmount;
+	private static final int startingLives;
+	private static final boolean debugDrainLife;
+	private static final int debugDrainLifeAmount;
 
-	public Config() {
+	static {
 		JsonReader reader = new JsonReader();
 		JsonValue json = reader.parse(Gdx.files.internal("config/config.json"));
 
@@ -19,15 +19,15 @@ public class Config {
 		debugDrainLifeAmount = json.getInt("debugDrainLifeAmount");
 	}
 
-	public boolean isDebugDrainLife() {
+	public static boolean isDebugDrainLife() {
 		return debugDrainLife;
 	}
 
-	public int getDebugDrainLifeAmount() {
+	public static int getDebugDrainLifeAmount() {
 		return debugDrainLifeAmount;
 	}
 
-	public int getStartingLives() {
+	public static int getStartingLives() {
 		return startingLives;
 	}
 
