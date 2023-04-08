@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -73,6 +74,11 @@ public class GdxLoggerTest {
 		logger.info("Hello, {}!", "World");
 
 		verify(app, times(1)).log(Mockito.contains("LOG"), Mockito.contains("Hello, World!"));
+	}
+
+	@Test
+	public void failTest() {
+		fail();
 	}
 
 }
