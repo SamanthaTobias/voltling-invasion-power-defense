@@ -1,0 +1,36 @@
+name: Gradle Dependency Submission
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  dependencies:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Run Gradle Dependency Submission Action for Core Module
+        uses: mikepenz/gradle-dependency-submission@v0.8.6
+        with:
+          gradle-project-path: "."
+          gradle-build-module: ":core"
+
+      - name: Run Gradle Dependency Submission Action for Desktop Module
+        uses: mikepenz/gradle-dependency-submission@v0.8.6
+        with:
+          gradle-project-path: "."
+          gradle-build-module: ":desktop"
+
+      - name: Run Gradle Dependency Submission Action for HTML Module
+        uses: mikepenz/gradle-dependency-submission@v0.8.6
+        with:
+          gradle-project-path: "."
+          gradle-build-module: ":html"
