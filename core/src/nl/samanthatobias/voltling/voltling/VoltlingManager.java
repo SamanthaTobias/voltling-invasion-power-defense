@@ -1,12 +1,13 @@
-package nl.samanthatobias.voltling.screen.game;
+package nl.samanthatobias.voltling.voltling;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 
+import nl.samanthatobias.voltling.core.GameStateActions;
+import nl.samanthatobias.voltling.factory.VoltlingFactory;
 import nl.samanthatobias.voltling.level.PathActions;
 import nl.samanthatobias.voltling.utils.ArrayUtils;
-import nl.samanthatobias.voltling.voltling.Voltling;
 
 public class VoltlingManager {
 
@@ -25,7 +26,7 @@ public class VoltlingManager {
 	}
 
 	public void spawnLesserVoltling() {
-		Voltling lesserVoltling = new Voltling(pathActions, "Lesser Voltling", 1, 100, skin);
+		Voltling lesserVoltling = VoltlingFactory.createLesserVoltling(pathActions, skin);
 		voltlings.add(lesserVoltling);
 		stage.addActor(lesserVoltling);
 	}

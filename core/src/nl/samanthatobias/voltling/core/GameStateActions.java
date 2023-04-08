@@ -1,6 +1,8 @@
-package nl.samanthatobias.voltling.screen.game;
+package nl.samanthatobias.voltling.core;
 
 public interface GameStateActions {
+
+	boolean isGameOver();
 
 	void removeLives(int delta);
 

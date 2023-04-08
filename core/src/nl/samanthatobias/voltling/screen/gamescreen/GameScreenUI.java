@@ -1,4 +1,4 @@
-package nl.samanthatobias.voltling.screen.game;
+package nl.samanthatobias.voltling.screen.gamescreen;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -29,18 +29,6 @@ public class GameScreenUI {
 		livesLabel.setText("Lives: " + lives);
 	}
 
-	public Label getLivesLabel() {
-		return livesLabel;
-	}
-
-	public TextButton getPlayPauseButton() {
-		return playPauseButton;
-	}
-
-	public TextButton getExitButton() {
-		return exitButton;
-	}
-
 	private Label setupLivesLabel(int startingLives) {
 		final Label livesLabel;
 		livesLabel = new Label("Lives: " + startingLives, skin);
@@ -60,6 +48,14 @@ public class GameScreenUI {
 			}
 		});
 		stage.addActor(exitButton);
+
+		exitButton.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				gameScreenActions.onExitGame();
+			}
+		});
+
 		return exitButton;
 	}
 

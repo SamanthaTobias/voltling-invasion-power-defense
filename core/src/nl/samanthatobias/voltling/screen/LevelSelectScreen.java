@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import nl.samanthatobias.voltling.VoltlingGame;
-import nl.samanthatobias.voltling.screen.game.GameScreen;
+import nl.samanthatobias.voltling.screen.gamescreen.GameScreen;
 
 public class LevelSelectScreen extends Screen {
 

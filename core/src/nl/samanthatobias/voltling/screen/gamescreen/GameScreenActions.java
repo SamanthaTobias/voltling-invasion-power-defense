@@ -1,9 +1,11 @@
-package nl.samanthatobias.voltling.screen.game;
+package nl.samanthatobias.voltling.screen.gamescreen;
 
 public interface GameScreenActions {
 
 	void onExitGame();
 
 	boolean onPlayPauseToggle();
+
+	void onChangeLives();
 
 }
