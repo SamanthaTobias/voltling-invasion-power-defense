@@ -1,14 +1,10 @@
 package nl.samanthatobias.voltling.utils;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.TimeUtils;
 
 public class GdxLogger {
 
-	private final static DateFormat format = new SimpleDateFormat("HH:mm:ss");
+//	private final static DateFormat format = new SimpleDateFormat("HH:mm:ss");
 
 	private final String className;
 
@@ -41,8 +37,9 @@ public class GdxLogger {
 	}
 
 	private String tag(String logLevel) {
-		String time = format.format(TimeUtils.millis());
-		return logLevel + " " + time + " " + className;
+//		String time = format.format(TimeUtils.millis()); // TODO
+//		return logLevel + " " + time + " " + className;
+		return logLevel + " " + className;
 	}
 
 	private static String format(String message, Object... args) {
