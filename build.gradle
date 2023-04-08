@@ -59,7 +59,7 @@ project(":core") {
 
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
-        implementation "com.google.gwt:gwt-user:2.9.0"
+        implementation "com.google.gwt:gwt-user:2.10.0"
     }
 }
 
