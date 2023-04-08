@@ -9,6 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import nl.samanthatobias.voltling.VoltlingGame;
 import nl.samanthatobias.voltling.config.Config;
+import nl.samanthatobias.voltling.level.Path;
+import nl.samanthatobias.voltling.level.Paths;
 import nl.samanthatobias.voltling.screen.GameEndScreen;
 import nl.samanthatobias.voltling.screen.Screen;
 
@@ -30,10 +32,11 @@ public class GameScreen extends Screen implements GameScreenActions {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		int lives = config.getStartingLives();
-		gameState = new GameState(lives);
+		Path path = Paths.createBasicPath();
+		gameState = new GameState(path, lives);
 		gameScreenUI = new GameScreenUI(this, uiStage, uiSkin, lives);
 		voltlingStage = new Stage();
-		voltlingManager = new VoltlingManager(gameState, voltlingStage, uiSkin);
+		voltlingManager = new VoltlingManager(gameState, path, voltlingStage, uiSkin);
 
 		voltlingManager.spawnLesserVoltling();
 

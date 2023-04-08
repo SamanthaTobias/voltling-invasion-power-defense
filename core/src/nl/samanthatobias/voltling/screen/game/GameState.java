@@ -1,7 +1,6 @@
 package nl.samanthatobias.voltling.screen.game;
 
 import nl.samanthatobias.voltling.level.Path;
-import nl.samanthatobias.voltling.level.Paths;
 
 public class GameState implements GameStateActions {
 
@@ -10,8 +9,8 @@ public class GameState implements GameStateActions {
 	private int lives;
 	private boolean isPlaying;
 
-	public GameState(int startingLives) {
-		this.path = Paths.createBasicPath();
+	public GameState(Path path, int startingLives) {
+		this.path = path;
 		this.lives = startingLives;
 		this.isPlaying = false;
 	}
@@ -20,6 +19,7 @@ public class GameState implements GameStateActions {
 		if (delta <= 0) {
 			throw new IllegalArgumentException("Must remove positive number of lives");
 		}
+		System.out.println("removing lives by " + delta);
 		lives -= delta;
 	}
 

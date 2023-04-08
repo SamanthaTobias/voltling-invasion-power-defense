@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
-public class Path {
+public class Path implements PathActions {
 
 	private final Array<Vector2> points;
 
@@ -13,6 +13,7 @@ public class Path {
 		this.points = points;
 	}
 
+	@Override
 	public Array<Vector2> getPoints() {
 		return new Array<>(points);
 	}
@@ -27,6 +28,16 @@ public class Path {
 			shapeRenderer.line(point1.x, point1.y, point2.x, point2.y);
 		}
 		shapeRenderer.end();
+	}
+
+	@Override
+	public Vector2 getStartPoint() {
+		return new Vector2(points.first());
+	}
+
+	@Override
+	public Vector2 getEndPoint() {
+		return new Vector2(points.peek());
 	}
 
 }

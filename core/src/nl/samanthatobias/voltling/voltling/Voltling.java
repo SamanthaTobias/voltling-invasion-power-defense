@@ -5,16 +5,23 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Array;
+
+import nl.samanthatobias.voltling.level.PathActions;
 
 public class Voltling extends Actor {
 
+	private final PathActions pathActions;
 	private final Label sprite;
 	private final Vector2 position;
 	private final int power;
 	private final int speed;
 
-	public Voltling(String name, Vector2 position, int power, int speed, Skin skin) {
-		this.position = position;
+	private int pathIndex = 0;
+
+	public Voltling(PathActions pathActions, String name, int power, int speed, Skin skin) {
+		this.pathActions = pathActions;
+		this.position = pathActions.getStartPoint();
 		this.sprite = createSprite(name, skin);
 		this.power = power;
 		this.speed = speed;
@@ -35,12 +42,30 @@ public class Voltling extends Actor {
 	public void act(float delta) {
 		super.act(delta);
 
-		float dx = delta * speed;
-		updatePosition(dx, 0f);
+		Array<Vector2> pathPoints = pathActions.getPoints();
+		if (pathIndex < pathPoints.size - 1) {
+			Vector2 nextPoint = pathPoints.get(pathIndex + 1);
+			Vector2 direction = new Vector2(nextPoint).sub(position).nor();
+			float dx = direction.x * delta * speed;
+			float dy = direction.y * delta * speed;
+
+			updatePosition(dx, dy);
+
+			if (position.dst2(nextPoint) < (dx * dx + dy * dy)) { // ??
+				position.set(nextPoint);
+				pathIndex++;
+			}
+		}
 	}
 
-	public Label getSprite() {
-		return sprite;
+	@Override
+	public boolean remove() {
+		sprite.remove();
+		return super.remove();
+	}
+
+	public boolean isAtPoint(Vector2 otherPosition) {
+		return position.epsilonEquals(otherPosition, 0.1f);
 	}
 
 	public float getX() {
@@ -59,10 +84,6 @@ public class Voltling extends Actor {
 
 	public int getPower() {
 		return power;
-	}
-
-	public int getSpeed() {
-		return speed;
 	}
 
 }
