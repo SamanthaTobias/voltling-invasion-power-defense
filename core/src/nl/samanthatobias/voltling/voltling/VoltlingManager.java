@@ -8,8 +8,11 @@ import nl.samanthatobias.voltling.core.GameStateActions;
 import nl.samanthatobias.voltling.factory.VoltlingFactory;
 import nl.samanthatobias.voltling.level.PathActions;
 import nl.samanthatobias.voltling.utils.ArrayUtils;
+import nl.samanthatobias.voltling.utils.GdxLogger;
 
 public class VoltlingManager {
+
+	private final static GdxLogger log = new GdxLogger(VoltlingManager.class);
 
 	private final GameStateActions gameStateActions;
 	private final PathActions pathActions;
@@ -26,6 +29,7 @@ public class VoltlingManager {
 	}
 
 	public void spawnLesserVoltling() {
+		log.debug("Spawning Lesser Voltling.");
 		Voltling lesserVoltling = VoltlingFactory.createLesserVoltling(pathActions, skin);
 		voltlings.add(lesserVoltling);
 		stage.addActor(lesserVoltling);
@@ -34,6 +38,7 @@ public class VoltlingManager {
 	public void updateVoltlings() {
 		for (Voltling voltling : ArrayUtils.iterator(voltlings)) {
 			if (voltling.isAtPoint(pathActions.getEndPoint())) {
+				log.info(voltling.getName() + " has reached the end of its path.");
 				gameStateActions.removeLives(voltling.getPower());
 				voltling.remove();
 				voltlings.removeValue(voltling, true);

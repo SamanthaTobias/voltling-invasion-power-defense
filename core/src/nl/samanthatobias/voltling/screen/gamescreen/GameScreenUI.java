@@ -48,14 +48,6 @@ public class GameScreenUI {
 			}
 		});
 		stage.addActor(exitButton);
-
-		exitButton.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				gameScreenActions.onExitGame();
-			}
-		});
-
 		return exitButton;
 	}
 

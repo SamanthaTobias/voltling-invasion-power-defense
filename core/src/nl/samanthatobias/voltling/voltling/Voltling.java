@@ -8,8 +8,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 
 import nl.samanthatobias.voltling.level.PathActions;
+import nl.samanthatobias.voltling.utils.GdxLogger;
 
 public class Voltling extends Actor {
+
+	private final static GdxLogger log = new GdxLogger(Voltling.class);
 
 	private final PathActions pathActions;
 	private final Label sprite;
@@ -21,6 +24,7 @@ public class Voltling extends Actor {
 
 	public Voltling(PathActions pathActions, String name, int power, int speed, Skin skin) {
 		this.pathActions = pathActions;
+		setName(name);
 		this.position = pathActions.getStartPoint();
 		this.sprite = createSprite(name, skin);
 		this.power = power;
@@ -51,7 +55,8 @@ public class Voltling extends Actor {
 
 			updatePosition(dx, dy);
 
-			if (position.dst2(nextPoint) < (dx * dx + dy * dy)) { // ??
+			if (position.dst2(nextPoint) < (dx * dx + dy * dy)) {
+				log.debug("Voltling reached next point.");
 				position.set(nextPoint);
 				pathIndex++;
 			}

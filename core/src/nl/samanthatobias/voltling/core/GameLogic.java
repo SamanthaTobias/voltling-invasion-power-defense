@@ -6,9 +6,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import nl.samanthatobias.voltling.config.Config;
 import nl.samanthatobias.voltling.level.Path;
 import nl.samanthatobias.voltling.screen.gamescreen.GameScreenActions;
+import nl.samanthatobias.voltling.utils.GdxLogger;
 import nl.samanthatobias.voltling.voltling.VoltlingManager;
 
 public class GameLogic {
+
+	private final static GdxLogger log = new GdxLogger(GameLogic.class);
 
 	private final GameScreenActions gameScreenActions;
 	private final GameStateActions gameStateActions;
@@ -34,6 +37,7 @@ public class GameLogic {
 		if (Config.isDebugDrainLife()) {
 			timeSinceLastDrainLife += delta;
 			if (timeSinceLastDrainLife >= 1f) {
+				log.debug("Draining life.");
 				gameStateActions.removeLives(Config.getDebugDrainLifeAmount() * (int) timeSinceLastDrainLife);
 				timeSinceLastDrainLife = 0f;
 			}

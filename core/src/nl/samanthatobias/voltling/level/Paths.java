@@ -4,9 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
+import nl.samanthatobias.voltling.utils.GdxLogger;
+
 public class Paths {
 
+	private final static GdxLogger log = new GdxLogger(Paths.class);
+
 	public static Path createBasicPath() {
+		log.debug("Creating basic path.");
+
 		Array<Vector2> pathPoints = new Array<>();
 		float screenWidth = Gdx.graphics.getWidth();
 		float screenHeight = Gdx.graphics.getHeight();

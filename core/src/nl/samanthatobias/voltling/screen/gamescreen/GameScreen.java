@@ -14,8 +14,11 @@ import nl.samanthatobias.voltling.level.Path;
 import nl.samanthatobias.voltling.level.Paths;
 import nl.samanthatobias.voltling.screen.GameEndScreen;
 import nl.samanthatobias.voltling.screen.Screen;
+import nl.samanthatobias.voltling.utils.GdxLogger;
 
 public class GameScreen extends Screen implements GameScreenActions {
+
+	private final static GdxLogger log = new GdxLogger(GameScreen.class);
 
 	private final GameState gameState;
 	private final GameLogic gameLogic;
@@ -73,6 +76,7 @@ public class GameScreen extends Screen implements GameScreenActions {
 	}
 
 	private void endGame() {
+		log.info("Ending game.");
 		game.setScreen(new GameEndScreen(game, gameState.getLives()));
 	}
 

@@ -1,6 +1,10 @@
 package nl.samanthatobias.voltling.core;
 
+import nl.samanthatobias.voltling.utils.GdxLogger;
+
 public class GameState implements GameStateActions {
+
+	private final static GdxLogger log = new GdxLogger(GameState.class);
 
 	private int lives;
 	private boolean isPlaying;
@@ -15,7 +19,7 @@ public class GameState implements GameStateActions {
 		if (delta <= 0) {
 			throw new IllegalArgumentException("Must remove positive number of lives");
 		}
-		System.out.println("removing lives by " + delta);
+		log.info("Lost " + delta + " lives.");
 		lives -= delta;
 	}
 
@@ -33,6 +37,7 @@ public class GameState implements GameStateActions {
 	}
 
 	public boolean togglePlaying() {
+		log.info("Toggling play/pause.");
 		isPlaying = !isPlaying;
 		return isPlaying;
 	}
