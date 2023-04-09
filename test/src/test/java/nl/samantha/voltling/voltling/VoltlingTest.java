@@ -62,8 +62,6 @@ public class VoltlingTest {
 
 		assertTrue(voltling.isAtPoint(point1));
 		assertFalse(voltling.isAtPoint(point2));
-
-		fail(); // sanity check for branch
 	}
 
 	@Test
