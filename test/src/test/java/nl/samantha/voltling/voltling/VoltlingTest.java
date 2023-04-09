@@ -1,5 +1,6 @@
 package nl.samantha.voltling.voltling;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -8,10 +9,9 @@ import com.badlogic.gdx.utils.Array;
 import nl.samanthatobias.voltling.level.PathActions;
 import nl.samanthatobias.voltling.voltling.Voltling;
 
-import nl.samantha.test.TestApplication;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -22,15 +22,11 @@ public class VoltlingTest {
 	private PathActions mockPathActions;
 	private Label mockLabel;
 
-	@BeforeAll
-	public static void setupGdx() {
-		Gdx.app = new TestApplication();
-	}
-
 	@BeforeEach
 	public void setup() {
 		mockPathActions = mock(PathActions.class);
 		mockLabel = mock(Label.class);
+		Gdx.app = Mockito.mock(Application.class);
 		Vector2 startPoint = new Vector2(0, 0);
 		when(mockPathActions.getStartPoint()).thenReturn(startPoint);
 	}

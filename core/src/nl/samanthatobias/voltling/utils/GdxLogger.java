@@ -37,7 +37,7 @@ public class GdxLogger {
 	}
 
 	private String tag(String logLevel) {
-//		String time = format.format(TimeUtils.millis()); // TODO
+//		String time = format.format(TimeUtils.millis()); // TODO https://www.gwtproject.org/javadoc/latest/com/google/gwt/i18n/client/DateTimeFormat.html
 //		return logLevel + " " + time + " " + className;
 		return logLevel + " " + className;
 	}
