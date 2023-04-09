@@ -12,9 +12,9 @@ public class Config {
 
 	private static final Logger log = createLogger(Config.class);
 
-	private static final int STARTING_LIVES;
-	private static final boolean DEBUG_DRAIN_LIFE;
-	private static final int DEBUG_DRAIN_LIFE_AMOUNT;
+	public static final int STARTING_LIVES;
+	public static final boolean DEBUG_DRAIN_LIFE;
+	public static final int DEBUG_DRAIN_LIFE_AMOUNT;
 
 	static {
 		log.info("Reading config.json");
@@ -24,18 +24,6 @@ public class Config {
 		STARTING_LIVES = json.getInt("startingLives");
 		DEBUG_DRAIN_LIFE = json.getBoolean("debugDrainLife");
 		DEBUG_DRAIN_LIFE_AMOUNT = json.getInt("debugDrainLifeAmount");
-	}
-
-	public static boolean isDebugDrainLife() {
-		return DEBUG_DRAIN_LIFE;
-	}
-
-	public static int getDebugDrainLifeAmount() {
-		return DEBUG_DRAIN_LIFE_AMOUNT;
-	}
-
-	public static int getStartingLives() {
-		return STARTING_LIVES;
 	}
 
 }

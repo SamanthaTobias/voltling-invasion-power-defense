@@ -36,11 +36,11 @@ public class GameLogic {
 	}
 
 	public void gameLoop(float delta) {
-		if (Config.isDebugDrainLife()) {
+		if (Config.DEBUG_DRAIN_LIFE) {
 			timeSinceLastDrainLife += delta;
 			if (timeSinceLastDrainLife >= 1f) {
 				log.debug("Draining life.");
-				gameStateActions.removeLives(Config.getDebugDrainLifeAmount() * (int) timeSinceLastDrainLife);
+				gameStateActions.removeLives(Config.DEBUG_DRAIN_LIFE_AMOUNT * (int) timeSinceLastDrainLife);
 				timeSinceLastDrainLife = 0f;
 			}
 		}

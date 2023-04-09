@@ -34,7 +34,7 @@ public class GameScreen extends Screen implements GameScreenActions {
 		Gdx.gl.glClearColor(0, 0.1f, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		int lives = Config.getStartingLives();
+		int lives = Config.STARTING_LIVES;
 		Path path = Paths.createBasicPath();
 		gameState = new GameState(lives);
 		voltlingStage = new Stage();
