@@ -6,7 +6,7 @@ import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
 public class GameState implements GameStateActions {
 
-	private final static Logger log = createLogger(GameState.class);
+	private static final Logger log = createLogger(GameState.class);
 
 	private int lives;
 	private boolean isPlaying;

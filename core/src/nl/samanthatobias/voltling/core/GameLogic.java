@@ -13,7 +13,7 @@ import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
 public class GameLogic {
 
-	private final static Logger log = createLogger(GameLogic.class);
+	private static final Logger log = createLogger(GameLogic.class);
 
 	private final GameScreenActions gameScreenActions;
 	private final GameStateActions gameStateActions;

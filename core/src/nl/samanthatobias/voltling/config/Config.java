@@ -10,32 +10,32 @@ import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
 public class Config {
 
-	private final static Logger log = createLogger(Config.class);
+	private static final Logger log = createLogger(Config.class);
 
-	private static final int startingLives;
-	private static final boolean debugDrainLife;
-	private static final int debugDrainLifeAmount;
+	private static final int STARTING_LIVES;
+	private static final boolean DEBUG_DRAIN_LIFE;
+	private static final int DEBUG_DRAIN_LIFE_AMOUNT;
 
 	static {
 		log.info("Reading config.json");
 		JsonReader reader = new JsonReader();
 		JsonValue json = reader.parse(Gdx.files.internal("config/config.json"));
 
-		startingLives = json.getInt("startingLives");
-		debugDrainLife = json.getBoolean("debugDrainLife");
-		debugDrainLifeAmount = json.getInt("debugDrainLifeAmount");
+		STARTING_LIVES = json.getInt("startingLives");
+		DEBUG_DRAIN_LIFE = json.getBoolean("debugDrainLife");
+		DEBUG_DRAIN_LIFE_AMOUNT = json.getInt("debugDrainLifeAmount");
 	}
 
 	public static boolean isDebugDrainLife() {
-		return debugDrainLife;
+		return DEBUG_DRAIN_LIFE;
 	}
 
 	public static int getDebugDrainLifeAmount() {
-		return debugDrainLifeAmount;
+		return DEBUG_DRAIN_LIFE_AMOUNT;
 	}
 
 	public static int getStartingLives() {
-		return startingLives;
+		return STARTING_LIVES;
 	}
 
 }

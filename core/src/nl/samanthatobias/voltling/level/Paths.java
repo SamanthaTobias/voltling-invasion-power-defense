@@ -10,7 +10,7 @@ import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
 public class Paths {
 
-	private final static Logger log = createLogger(Paths.class);
+	private static final Logger log = createLogger(Paths.class);
 
 	public static Path createBasicPath() {
 		log.debug("Creating basic path.");

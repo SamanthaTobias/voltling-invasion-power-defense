@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class VoltlingTest {
+class VoltlingTest {
 
 	private PathActions mockPathActions;
 	private Label mockLabel;
@@ -32,14 +32,14 @@ public class VoltlingTest {
 	}
 
 	@Test
-	public void testVoltlingCreation() {
+	void testVoltlingCreation() {
 		Voltling voltling = new Voltling(mockPathActions, "TestVoltling", 10, 5, mockLabel);
 		assertEquals("TestVoltling", voltling.getName());
 		assertEquals(10, voltling.getPower());
 	}
 
 	@Test
-	public void testVoltlingMovement() {
+	void testVoltlingMovement() {
 		Array<Vector2> pathPoints = new Array<>();
 		pathPoints.add(new Vector2(0, 0));
 		pathPoints.add(new Vector2(100, 0));
@@ -54,7 +54,7 @@ public class VoltlingTest {
 	}
 
 	@Test
-	public void testIsAtPoint() {
+	void testIsAtPoint() {
 		Voltling voltling = new Voltling(mockPathActions, "TestVoltling", 10, 5, mockLabel);
 
 		Vector2 point1 = new Vector2(0, 0);
@@ -65,7 +65,7 @@ public class VoltlingTest {
 	}
 
 	@Test
-	public void testUpdatePosition() {
+	void testUpdatePosition() {
 		Voltling voltling = new Voltling(mockPathActions, "TestVoltling", 10, 5, mockLabel);
 
 		float dx = 3.0f;

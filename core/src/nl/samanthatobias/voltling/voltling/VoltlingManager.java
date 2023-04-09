@@ -14,7 +14,7 @@ import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
 public class VoltlingManager {
 
-	private final static Logger log = createLogger(VoltlingManager.class);
+	private static final Logger log = createLogger(VoltlingManager.class);
 
 	private final GameStateActions gameStateActions;
 	private final PathActions pathActions;

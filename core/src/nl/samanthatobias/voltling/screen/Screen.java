@@ -15,7 +15,7 @@ public abstract class Screen extends ScreenAdapter {
 	protected final Stage uiStage;
 	protected final Skin uiSkin;
 
-	public Screen(VoltlingGame game) {
+	protected Screen(VoltlingGame game) {
 		this.game = game;
 		uiStage = new Stage(new ScreenViewport());
 		uiSkin = new Skin(Gdx.files.internal( "skins/glassy/glassy-ui.json"));

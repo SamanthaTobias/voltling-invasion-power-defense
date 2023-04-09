@@ -1,4 +1,4 @@
-package nl.samantha.voltling.utils;
+package nl.samantha.voltling.utils.screen;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -17,7 +17,7 @@ import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class GdxLoggerTest {
+class GdxLoggerTest {
 
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	private final PrintStream originalOut = System.out;
@@ -33,7 +33,7 @@ public class GdxLoggerTest {
 	}
 
 	@Test
-	public void testInfoLogging() {
+	void testInfoLogging() {
 		Application app = Mockito.mock(Application.class);
 		Gdx.app = app;
 
@@ -44,7 +44,7 @@ public class GdxLoggerTest {
 	}
 
 	@Test
-	public void testErrorLogging() {
+	void testErrorLogging() {
 		Application app = Mockito.mock(Application.class);
 		Gdx.app = app;
 
@@ -55,7 +55,7 @@ public class GdxLoggerTest {
 	}
 
 	@Test
-	public void testDebugLogging() {
+	void testDebugLogging() {
 		Application app = Mockito.mock(Application.class);
 		Gdx.app = app;
 
@@ -66,7 +66,7 @@ public class GdxLoggerTest {
 	}
 
 	@Test
-	public void testFormattedMessage() {
+	void testFormattedMessage() {
 		Application app = Mockito.mock(Application.class);
 		Gdx.app = app;
 

@@ -13,7 +13,7 @@ import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
 public class Voltling extends Actor {
 
-	private final static Logger log = createLogger(Voltling.class);
+	private static final Logger log = createLogger(Voltling.class);
 
 	private final PathActions pathActions;
 	private final Label sprite;
@@ -68,10 +68,12 @@ public class Voltling extends Actor {
 		return position.epsilonEquals(otherPosition, 0.1f);
 	}
 
+	@Override
 	public float getX() {
 		return position.x;
 	}
 
+	@Override
 	public float getY() {
 		return position.y;
 	}

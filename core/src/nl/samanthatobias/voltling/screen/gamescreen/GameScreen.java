@@ -20,7 +20,7 @@ import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
 public class GameScreen extends Screen implements GameScreenActions {
 
-	private final static Logger log = createLogger(GameScreen.class);
+	private static final Logger log = createLogger(GameScreen.class);
 
 	private final GameState gameState;
 	private final GameLogic gameLogic;

@@ -30,40 +30,40 @@ public class GameScreenUI {
 	}
 
 	private Label setupLivesLabel(int startingLives) {
-		final Label livesLabel;
-		livesLabel = new Label("Lives: " + startingLives, skin);
-		livesLabel.setPosition(10, stage.getHeight() - livesLabel.getHeight() - 10);
-		stage.addActor(livesLabel);
-		return livesLabel;
+		final Label label;
+		label = new Label("Lives: " + startingLives, skin);
+		label.setPosition(10, stage.getHeight() - label.getHeight() - 10);
+		stage.addActor(label);
+		return label;
 	}
 
 	private TextButton setupExitButton() {
-		final TextButton exitButton;
-		exitButton = new TextButton("Exit", skin);
-		exitButton.setPosition(stage.getWidth() - exitButton.getWidth() - 10, playPauseButton.getHeight() + 20);
-		exitButton.addListener(new ClickListener() {
+		final TextButton button;
+		button = new TextButton("Exit", skin);
+		button.setPosition(stage.getWidth() - button.getWidth() - 10, playPauseButton.getHeight() + 20);
+		button.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				gameScreenActions.onExitGame();
 			}
 		});
-		stage.addActor(exitButton);
-		return exitButton;
+		stage.addActor(button);
+		return button;
 	}
 
 	private TextButton setupPlayPauseButton() {
-		final TextButton playPauseButton;
-		playPauseButton = new TextButton("Play", skin);
-		playPauseButton.setPosition(stage.getWidth() - playPauseButton.getWidth() - 10, 10);
-		playPauseButton.addListener(new ClickListener() {
+		final TextButton button;
+		button = new TextButton("Play", skin);
+		button.setPosition(stage.getWidth() - button.getWidth() - 10, 10);
+		button.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				boolean playing = gameScreenActions.onPlayPauseToggle();
-				playPauseButton.setText(playing ? "Pause" : "Play");
+				button.setText(playing ? "Pause" : "Play");
 			}
 		});
-		stage.addActor(playPauseButton);
-		return playPauseButton;
+		stage.addActor(button);
+		return button;
 	}
 
 }
