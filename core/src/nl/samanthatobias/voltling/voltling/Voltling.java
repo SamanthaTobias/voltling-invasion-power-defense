@@ -28,6 +28,7 @@ public class Voltling extends Actor {
 		setName(name);
 		this.position = pathActions.getStartPoint();
 		this.sprite = sprite;
+		sprite.setPosition(position.x, position.y);
 		this.power = power;
 		this.speed = speed;
 	}
