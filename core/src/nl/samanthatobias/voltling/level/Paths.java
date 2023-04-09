@@ -4,11 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
-import nl.samanthatobias.voltling.utils.GdxLogger;
+import nl.samanthatobias.voltling.utils.logger.Logger;
+
+import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
 public class Paths {
 
-	private final static GdxLogger log = new GdxLogger(Paths.class);
+	private final static Logger log = createLogger(Paths.class);
 
 	public static Path createBasicPath() {
 		log.debug("Creating basic path.");

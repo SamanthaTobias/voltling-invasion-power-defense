@@ -14,11 +14,13 @@ import nl.samanthatobias.voltling.level.Path;
 import nl.samanthatobias.voltling.level.Paths;
 import nl.samanthatobias.voltling.screen.GameEndScreen;
 import nl.samanthatobias.voltling.screen.Screen;
-import nl.samanthatobias.voltling.utils.GdxLogger;
+import nl.samanthatobias.voltling.utils.logger.Logger;
+
+import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
 public class GameScreen extends Screen implements GameScreenActions {
 
-	private final static GdxLogger log = new GdxLogger(GameScreen.class);
+	private final static Logger log = createLogger(GameScreen.class);
 
 	private final GameState gameState;
 	private final GameLogic gameLogic;

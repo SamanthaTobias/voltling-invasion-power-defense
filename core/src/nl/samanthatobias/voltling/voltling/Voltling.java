@@ -7,11 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 
 import nl.samanthatobias.voltling.level.PathActions;
-import nl.samanthatobias.voltling.utils.GdxLogger;
+import nl.samanthatobias.voltling.utils.logger.Logger;
+
+import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
 public class Voltling extends Actor {
 
-	private final static GdxLogger log = new GdxLogger(Voltling.class);
+	private final static Logger log = createLogger(Voltling.class);
 
 	private final PathActions pathActions;
 	private final Label sprite;

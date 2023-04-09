@@ -6,12 +6,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import nl.samanthatobias.voltling.config.Config;
 import nl.samanthatobias.voltling.level.Path;
 import nl.samanthatobias.voltling.screen.gamescreen.GameScreenActions;
-import nl.samanthatobias.voltling.utils.GdxLogger;
+import nl.samanthatobias.voltling.utils.logger.Logger;
 import nl.samanthatobias.voltling.voltling.VoltlingManager;
+
+import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
 public class GameLogic {
 
-	private final static GdxLogger log = new GdxLogger(GameLogic.class);
+	private final static Logger log = createLogger(GameLogic.class);
 
 	private final GameScreenActions gameScreenActions;
 	private final GameStateActions gameStateActions;

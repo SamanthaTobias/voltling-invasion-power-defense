@@ -1,10 +1,12 @@
 package nl.samanthatobias.voltling.core;
 
-import nl.samanthatobias.voltling.utils.GdxLogger;
+import nl.samanthatobias.voltling.utils.logger.Logger;
+
+import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
 public class GameState implements GameStateActions {
 
-	private final static GdxLogger log = new GdxLogger(GameState.class);
+	private final static Logger log = createLogger(GameState.class);
 
 	private int lives;
 	private boolean isPlaying;

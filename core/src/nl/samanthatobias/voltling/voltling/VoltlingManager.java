@@ -8,11 +8,13 @@ import nl.samanthatobias.voltling.core.GameStateActions;
 import nl.samanthatobias.voltling.factory.VoltlingFactory;
 import nl.samanthatobias.voltling.level.PathActions;
 import nl.samanthatobias.voltling.utils.ArrayUtils;
-import nl.samanthatobias.voltling.utils.GdxLogger;
+import nl.samanthatobias.voltling.utils.logger.Logger;
+
+import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
 public class VoltlingManager {
 
-	private final static GdxLogger log = new GdxLogger(VoltlingManager.class);
+	private final static Logger log = createLogger(VoltlingManager.class);
 
 	private final GameStateActions gameStateActions;
 	private final PathActions pathActions;

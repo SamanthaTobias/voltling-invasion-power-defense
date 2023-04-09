@@ -47,7 +47,7 @@ public class VoltlingTest {
 
 		Voltling voltling = new Voltling(mockPathActions, "TestVoltling", 1, 4, mockLabel);
 
-		voltling.act(3); // Simulate 1 second of time passing
+		voltling.act(3);
 
 		assertEquals(3*4, voltling.getX());
 		assertEquals(0, voltling.getY());

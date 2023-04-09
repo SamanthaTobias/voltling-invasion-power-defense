@@ -4,11 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 
-import nl.samanthatobias.voltling.utils.GdxLogger;
+import nl.samanthatobias.voltling.utils.logger.Logger;
+
+import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
 public class Config {
 
-	private final static GdxLogger log = new GdxLogger(Config.class);
+	private final static Logger log = createLogger(Config.class);
 
 	private static final int startingLives;
 	private static final boolean debugDrainLife;
