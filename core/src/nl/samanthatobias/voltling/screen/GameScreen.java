@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import nl.samanthatobias.voltling.VoltlingGame;
 import nl.samanthatobias.voltling.config.Config;
-import nl.samanthatobias.voltling.core.GameLogic;
 import nl.samanthatobias.voltling.core.GameState;
 import nl.samanthatobias.voltling.level.Path;
 import nl.samanthatobias.voltling.level.Paths;
@@ -27,7 +26,6 @@ public class GameScreen extends Screen implements GameScreenActions {
 	private static final Logger log = createLogger(GameScreen.class);
 
 	private final GameState gameState;
-	private final GameLogic gameLogic;
 	private final GameScreenUI gameScreenUI;
 
 	private final OrthographicCamera camera;
@@ -42,11 +40,10 @@ public class GameScreen extends Screen implements GameScreenActions {
 		int lives = Config.STARTING_LIVES;
 		Path path = Paths.createBasicPath();
 		actorStage = new Stage();
-		gameState = new GameState(actorStage, path, lives);
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Skin voltlingSkin = buttonSkin; // TODO
-		gameLogic = new GameLogic(this, gameState, path, actorStage, voltlingSkin);
+		gameState = new GameState(this, actorStage, path, lives, voltlingSkin);
 		gameScreenUI = new GameScreenUI(this, gameState, buttonStage, buttonSkin, lives);
 
 		Gdx.input.setInputProcessor(new InputMultiplexer(buttonStage, actorStage));
@@ -61,7 +58,7 @@ public class GameScreen extends Screen implements GameScreenActions {
 		gameState.renderPath();
 
 		if (gameState.isPlaying()) {
-			gameLogic.gameLoop(delta);
+			gameState.gameLoop(delta);
 		}
 
 		actorStage.draw();

@@ -3,13 +3,17 @@ package nl.samanthatobias.voltling.core;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 
+import nl.samanthatobias.voltling.config.Config;
 import nl.samanthatobias.voltling.level.Path;
+import nl.samanthatobias.voltling.screen.GameScreenActions;
 import nl.samanthatobias.voltling.tower.Tower;
 import nl.samanthatobias.voltling.utils.ArrayUtils;
 import nl.samanthatobias.voltling.utils.logger.Logger;
 import nl.samanthatobias.voltling.utils.shapes.RectangleUtils;
+import nl.samanthatobias.voltling.voltling.VoltlingManager;
 
 import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
@@ -17,6 +21,8 @@ public class GameState implements GameStateActions {
 
 	private static final Logger log = createLogger(GameState.class);
 
+	private final GameScreenActions gameScreenActions;
+	private final VoltlingManager voltlingManager;
 	private final Stage actorStage;
 	private final Path path;
 	private final Array<Tower> towers;
@@ -24,12 +30,39 @@ public class GameState implements GameStateActions {
 	private int lives;
 	private boolean isPlaying;
 
-	public GameState(Stage actorStage, Path path, int startingLives) {
+	private float timeSinceLastDrainLife = 0f;
+
+	public GameState(GameScreenActions gameScreenActions, Stage actorStage, Path path, int startingLives,
+					 Skin voltlingSkin) {
+		this.gameScreenActions = gameScreenActions;
+		this.voltlingManager = new VoltlingManager(this, path, actorStage, voltlingSkin);
 		this.actorStage = actorStage;
 		this.path = path;
 		this.towers = new Array<>();
 		this.lives = startingLives;
 		this.isPlaying = false;
+
+		voltlingManager.spawnLesserVoltling();
+	}
+
+	public void gameLoop(float delta) {
+		if (Config.DEBUG_DRAIN_LIFE) {
+			timeSinceLastDrainLife += delta;
+			if (timeSinceLastDrainLife >= 1f) {
+				log.debug("Draining life.");
+				removeLives(Config.DEBUG_DRAIN_LIFE_AMOUNT * (int) timeSinceLastDrainLife);
+				timeSinceLastDrainLife = 0f;
+			}
+		}
+
+		actorStage.act(delta);
+		voltlingManager.updateVoltlings();
+
+		gameScreenActions.onChangeLives();
+
+		if (isGameOver()) {
+			gameScreenActions.onExitGame();
+		}
 	}
 
 	@Override
