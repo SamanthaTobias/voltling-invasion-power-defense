@@ -109,3 +109,6 @@ Thumbs.db
 
 # Other
 /test/build/
+
+# test folders
+/assets/texture/Goblins/

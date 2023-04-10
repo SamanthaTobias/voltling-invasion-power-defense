@@ -1,4 +1,4 @@
-package nl.samanthatobias.voltling.screen.gamescreen;
+package nl.samanthatobias.voltling.screen;
 
 public interface GameScreenActions {
 

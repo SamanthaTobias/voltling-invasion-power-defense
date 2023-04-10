@@ -1,10 +1,9 @@
-package nl.samanthatobias.voltling.factory;
+package nl.samanthatobias.voltling.voltling;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import nl.samanthatobias.voltling.level.PathActions;
-import nl.samanthatobias.voltling.voltling.Voltling;
 
 public class VoltlingFactory {
 

@@ -1,5 +1,5 @@
 {
   "startingLives": 100,
-  "debugDrainLife": true,
+  "debugDrainLife": false,
   "debugDrainLifeAmount": 10
 }

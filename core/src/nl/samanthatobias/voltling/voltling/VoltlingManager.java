@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 
 import nl.samanthatobias.voltling.core.GameStateActions;
-import nl.samanthatobias.voltling.factory.VoltlingFactory;
 import nl.samanthatobias.voltling.level.PathActions;
 import nl.samanthatobias.voltling.utils.ArrayUtils;
 import nl.samanthatobias.voltling.utils.logger.Logger;

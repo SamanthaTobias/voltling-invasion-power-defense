@@ -4,8 +4,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import nl.samanthatobias.voltling.config.Config;
-import nl.samanthatobias.voltling.level.Path;
-import nl.samanthatobias.voltling.screen.gamescreen.GameScreenActions;
+import nl.samanthatobias.voltling.level.PathActions;
+import nl.samanthatobias.voltling.screen.GameScreenActions;
 import nl.samanthatobias.voltling.utils.logger.Logger;
 import nl.samanthatobias.voltling.voltling.VoltlingManager;
 
@@ -19,18 +19,19 @@ public class GameLogic {
 	private final GameStateActions gameStateActions;
 	private final VoltlingManager voltlingManager;
 
-	private final Path path;
+	private final PathActions pathActions;
 	private final Stage stage;
 
 	private float timeSinceLastDrainLife = 0f;
 
-	public GameLogic(GameScreenActions gameScreenActions, GameStateActions gameStateActions, Path path, Stage stage,
-					 Skin skin) {
+	public GameLogic(GameScreenActions gameScreenActions, GameStateActions gameStateActions, PathActions pathActions,
+					 Stage stage,
+					 Skin skin) { // TODO merge this class with GameState,  add TowerManager? make VoltlingManager and TowerManager fields in this class?
 		this.gameScreenActions = gameScreenActions;
 		this.gameStateActions = gameStateActions;
-		this.path = path;
+		this.pathActions = pathActions;
 		this.stage = stage;
-		this.voltlingManager = new VoltlingManager(gameStateActions, path, stage, skin);
+		this.voltlingManager = new VoltlingManager(gameStateActions, pathActions, stage, skin);
 
 		voltlingManager.spawnLesserVoltling();
 	}
@@ -53,10 +54,6 @@ public class GameLogic {
 		if (gameStateActions.isGameOver()) {
 			gameScreenActions.onExitGame();
 		}
-	}
-
-	public void renderPath() {
-		path.render();
 	}
 
 }
