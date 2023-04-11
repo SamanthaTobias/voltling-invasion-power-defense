@@ -13,7 +13,8 @@ import nl.samanthatobias.voltling.tower.Tower;
 import nl.samanthatobias.voltling.utils.ArrayUtils;
 import nl.samanthatobias.voltling.utils.logger.Logger;
 import nl.samanthatobias.voltling.utils.shapes.RectangleUtils;
-import nl.samanthatobias.voltling.voltling.VoltlingManager;
+import nl.samanthatobias.voltling.voltling.Voltling;
+import nl.samanthatobias.voltling.voltling.VoltlingFactory;
 
 import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
@@ -22,10 +23,11 @@ public class GameState implements GameStateActions {
 	private static final Logger log = createLogger(GameState.class);
 
 	private final GameScreenActions gameScreenActions;
-	private final VoltlingManager voltlingManager;
 	private final Stage actorStage;
+	private final Skin voltlingSkin;
 	private final Path path;
 	private final Array<Tower> towers;
+	private final Array<Voltling> voltlings;
 
 	private int lives;
 	private boolean isPlaying;
@@ -35,14 +37,15 @@ public class GameState implements GameStateActions {
 	public GameState(GameScreenActions gameScreenActions, Stage actorStage, Path path, int startingLives,
 					 Skin voltlingSkin) {
 		this.gameScreenActions = gameScreenActions;
-		this.voltlingManager = new VoltlingManager(this, path, actorStage, voltlingSkin);
 		this.actorStage = actorStage;
+		this.voltlingSkin = voltlingSkin;
 		this.path = path;
 		this.towers = new Array<>();
+		this.voltlings = new Array<>();
 		this.lives = startingLives;
 		this.isPlaying = false;
 
-		voltlingManager.spawnLesserVoltling();
+		spawnLesserVoltling();
 	}
 
 	public void gameLoop(float delta) {
@@ -56,7 +59,7 @@ public class GameState implements GameStateActions {
 		}
 
 		actorStage.act(delta);
-		voltlingManager.updateVoltlings();
+		updateVoltlings();
 
 		gameScreenActions.onChangeLives();
 
@@ -140,6 +143,24 @@ public class GameState implements GameStateActions {
 			return true;
 		}
 		return false;
+	}
+
+	public void spawnLesserVoltling() {
+		log.debug("Spawning Lesser Voltling.");
+		Voltling lesserVoltling = VoltlingFactory.createLesserVoltling(path, voltlingSkin);
+		voltlings.add(lesserVoltling);
+		actorStage.addActor(lesserVoltling);
+	}
+
+	public void updateVoltlings() {
+		for (Voltling voltling : ArrayUtils.iterator(voltlings)) {
+			if (voltling.isAtPoint(path.getEndPoint())) {
+				log.info(voltling.getName() + " has reached the end of its path.");
+				removeLives(voltling.getPower());
+				voltling.remove();
+				voltlings.removeValue(voltling, true);
+			}
+		}
 	}
 
 	public int getLives() {
