@@ -1,5 +1,6 @@
 package nl.samanthatobias.voltling.config;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
@@ -26,6 +27,19 @@ public class Config {
 		DEBUG_DRAIN_LIFE = json.getBoolean("debugDrainLife");
 		DEBUG_DRAIN_LIFE_AMOUNT = json.getInt("debugDrainLifeAmount");
 		DEBUG_SMALL_PATH = json.getBoolean("debugSmallPath");
+
+		setLogLevel(json.getString("logLevel"));
+	}
+
+	@SuppressWarnings("GDXJavaLogLevel")
+	private static void setLogLevel(String logLevel) {
+		switch (logLevel.toLowerCase()) {
+			case "debug" -> Gdx.app.setLogLevel(Application.LOG_DEBUG);
+			case "info" -> Gdx.app.setLogLevel(Application.LOG_INFO);
+			case "error" -> Gdx.app.setLogLevel(Application.LOG_ERROR);
+			case "none" -> Gdx.app.setLogLevel(Application.LOG_NONE);
+			default -> throw new IllegalStateException("Invalid log level: " + logLevel);
+		}
 	}
 
 }
