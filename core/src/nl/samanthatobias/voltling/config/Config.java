@@ -18,6 +18,10 @@ public class Config {
 	public static final int DEBUG_DRAIN_LIFE_AMOUNT;
 	public static final boolean DEBUG_SMALL_PATH;
 
+	private static final String LOG_LEVEL;
+
+	private static boolean logLevelSet = false;
+
 	static {
 		log.info("Reading config.json");
 		JsonReader reader = new JsonReader();
@@ -28,18 +32,22 @@ public class Config {
 		DEBUG_DRAIN_LIFE_AMOUNT = json.getInt("debugDrainLifeAmount");
 		DEBUG_SMALL_PATH = json.getBoolean("debugSmallPath");
 
-		setLogLevel(json.getString("logLevel"));
+		LOG_LEVEL = json.getString("logLevel");
 	}
 
 	@SuppressWarnings("GDXJavaLogLevel")
-	private static void setLogLevel(String logLevel) {
-		switch (logLevel.toLowerCase()) {
+	public static void setLogLevel() {
+		if (logLevelSet) {
+			throw new IllegalStateException("Log level already set.");
+		}
+		switch (LOG_LEVEL.toLowerCase()) {
 			case "debug" -> Gdx.app.setLogLevel(Application.LOG_DEBUG);
 			case "info" -> Gdx.app.setLogLevel(Application.LOG_INFO);
 			case "error" -> Gdx.app.setLogLevel(Application.LOG_ERROR);
 			case "none" -> Gdx.app.setLogLevel(Application.LOG_NONE);
-			default -> throw new IllegalStateException("Invalid log level: " + logLevel);
+			default -> throw new IllegalStateException("Invalid log level: " + LOG_LEVEL);
 		}
+		logLevelSet = true;
 	}
 
 }
