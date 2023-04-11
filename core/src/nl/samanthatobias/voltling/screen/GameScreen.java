@@ -95,7 +95,8 @@ public class GameScreen extends Screen implements GameScreenActions {
 
 	@Override
 	public void onExitGame() {
-		endGame();
+		log.info("Ending game.");
+		game.setScreen(new GameEndScreen(game, gameState.getLives()));
 	}
 
 	@Override
@@ -112,11 +113,6 @@ public class GameScreen extends Screen implements GameScreenActions {
 		Vector3 cursorPosition = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
 		gameScreenUI.updatePlacingTowerPosition(cursorPosition);
 		camera.unproject(cursorPosition);
-	}
-
-	private void endGame() {
-		log.info("Ending game.");
-		game.setScreen(new GameEndScreen(game, gameState.getLives()));
 	}
 
 }

@@ -1,4 +1,4 @@
-package nl.samantha.voltling.utils.screen;
+package nl.samantha.voltling.utils.logger;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
