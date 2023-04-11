@@ -15,7 +15,7 @@ import nl.samanthatobias.voltling.VoltlingGame;
 import nl.samanthatobias.voltling.config.Config;
 import nl.samanthatobias.voltling.core.GameState;
 import nl.samanthatobias.voltling.level.Path;
-import nl.samanthatobias.voltling.level.Paths;
+import nl.samanthatobias.voltling.level.PathFactory;
 import nl.samanthatobias.voltling.ui.GameScreenUI;
 import nl.samanthatobias.voltling.utils.logger.Logger;
 
@@ -38,7 +38,7 @@ public class GameScreen extends Screen implements GameScreenActions {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		int lives = Config.STARTING_LIVES;
-		Path path = Paths.createBasicPath();
+		Path path = PathFactory.createBasicPath();
 		actorStage = new Stage();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

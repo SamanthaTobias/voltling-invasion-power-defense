@@ -1,5 +1,6 @@
 {
   "startingLives": 100,
   "debugDrainLife": false,
-  "debugDrainLifeAmount": 10
+  "debugDrainLifeAmount": 10,
+  "debugSmallPath": true
 }

@@ -15,6 +15,7 @@ public class Config {
 	public static final int STARTING_LIVES;
 	public static final boolean DEBUG_DRAIN_LIFE;
 	public static final int DEBUG_DRAIN_LIFE_AMOUNT;
+	public static final boolean DEBUG_SMALL_PATH;
 
 	static {
 		log.info("Reading config.json");
@@ -24,6 +25,7 @@ public class Config {
 		STARTING_LIVES = json.getInt("startingLives");
 		DEBUG_DRAIN_LIFE = json.getBoolean("debugDrainLife");
 		DEBUG_DRAIN_LIFE_AMOUNT = json.getInt("debugDrainLifeAmount");
+		DEBUG_SMALL_PATH = json.getBoolean("debugSmallPath");
 	}
 
 }
