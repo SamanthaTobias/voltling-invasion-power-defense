@@ -84,6 +84,10 @@ public class GameScreen extends Screen implements GameScreenActions {
 		buttonStage.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				if (buttonStage.hit(x, y, true) != null) {
+					return true;
+				}
+
 				if (button == Input.Buttons.LEFT && gameScreenUI.isPlacingTower()) {
 					gameScreenUI.handlePlaceTowerClick(x, y);
 					return true;

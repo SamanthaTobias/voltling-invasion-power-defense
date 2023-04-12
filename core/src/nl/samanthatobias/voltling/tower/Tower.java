@@ -20,7 +20,7 @@ public class Tower extends Actor {
 		setName(name + new Random().nextInt());
 		log.debug("Creating Tower with name {}.", getName());
 		this.texture = texture;
-		setSize(texture.getWidth(), texture.getHeight());
+		setSize(64, 64);
 	}
 
 	@Override
