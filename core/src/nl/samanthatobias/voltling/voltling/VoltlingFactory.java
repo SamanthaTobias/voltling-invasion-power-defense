@@ -1,19 +1,13 @@
 package nl.samanthatobias.voltling.voltling;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-
-import nl.samanthatobias.voltling.level.PathActions;
+import com.badlogic.gdx.graphics.Texture;
 
 public class VoltlingFactory {
 
-	public static Voltling createLesserVoltling(PathActions pathActions, Skin skin) {
+	public static Voltling createLesserVoltling() {
 		String name = "Lesser Voltling";
-		return new Voltling(pathActions, name, 1, 100, createSprite(name, skin));
-	}
-
-	private static Label createSprite(String name, Skin skin) {
-		return new Label(name, skin);
+		Texture lesserVoltlingTexture = new Texture("texture/Goblins/Crazed Goblin Priest-1.png");
+		return new Voltling(name, 1, 500, lesserVoltlingTexture, 32);
 	}
 
 }

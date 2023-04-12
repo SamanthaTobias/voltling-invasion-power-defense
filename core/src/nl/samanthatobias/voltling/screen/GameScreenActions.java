@@ -6,6 +6,8 @@ public interface GameScreenActions {
 
 	boolean onPlayPauseToggle();
 
-	void onChangeLives();
+	void onChangeLives(int lives);
+
+	void onChangeWave(int currentWaveIndex);
 
 }

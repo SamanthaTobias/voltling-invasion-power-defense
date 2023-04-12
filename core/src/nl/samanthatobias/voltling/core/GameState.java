@@ -3,7 +3,6 @@ package nl.samanthatobias.voltling.core;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 
 import nl.samanthatobias.voltling.config.Config;
@@ -14,7 +13,7 @@ import nl.samanthatobias.voltling.utils.ArrayUtils;
 import nl.samanthatobias.voltling.utils.logger.Logger;
 import nl.samanthatobias.voltling.utils.shapes.RectangleUtils;
 import nl.samanthatobias.voltling.voltling.Voltling;
-import nl.samanthatobias.voltling.voltling.VoltlingFactory;
+import nl.samanthatobias.voltling.wave.Wave;
 
 import static nl.samanthatobias.voltling.utils.logger.Logger.createLogger;
 
@@ -23,29 +22,28 @@ public class GameState implements GameStateActions {
 	private static final Logger log = createLogger(GameState.class);
 
 	private final GameScreenActions gameScreenActions;
+	private final Array<Wave> waves;
 	private final Stage actorStage;
-	private final Skin voltlingSkin;
 	private final Path path;
 	private final Array<Tower> towers;
 	private final Array<Voltling> voltlings;
 
+	private int currentWaveIndex = 0;
 	private int lives;
 	private boolean isPlaying;
 
 	private float timeSinceLastDrainLife = 0f;
 
-	public GameState(GameScreenActions gameScreenActions, Stage actorStage, Path path, int startingLives,
-					 Skin voltlingSkin) {
+	public GameState(GameScreenActions gameScreenActions, Array<Wave> waves, Stage actorStage, Path path,
+					 int startingLives) {
 		this.gameScreenActions = gameScreenActions;
+		this.waves = waves;
 		this.actorStage = actorStage;
-		this.voltlingSkin = voltlingSkin;
 		this.path = path;
 		this.towers = new Array<>();
 		this.voltlings = new Array<>();
 		this.lives = startingLives;
 		this.isPlaying = false;
-
-		spawnLesserVoltling();
 	}
 
 	public void gameLoop(float delta) {
@@ -58,10 +56,19 @@ public class GameState implements GameStateActions {
 			}
 		}
 
+		Wave currentWave = waves.get(currentWaveIndex);
+		Voltling voltling = currentWave.tic(delta);
+		if (voltling != null) {
+			placeVoltling(voltling);
+		} else if (currentWave.isOver()) {
+			currentWaveIndex++;
+			gameScreenActions.onChangeWave(currentWaveIndex);
+		}
+
 		actorStage.act(delta);
 		updateVoltlings();
 
-		gameScreenActions.onChangeLives();
+		gameScreenActions.onChangeLives(lives);
 
 		if (isGameOver()) {
 			gameScreenActions.onExitGame();
@@ -145,11 +152,12 @@ public class GameState implements GameStateActions {
 		return false;
 	}
 
-	public void spawnLesserVoltling() {
-		log.debug("Spawning Lesser Voltling.");
-		Voltling lesserVoltling = VoltlingFactory.createLesserVoltling(path, voltlingSkin);
-		voltlings.add(lesserVoltling);
-		actorStage.addActor(lesserVoltling);
+	private void placeVoltling(Voltling voltling) {
+		log.debug("Placing Voltling {}.", voltling.getName());
+		voltling.place(path);
+		voltlings.add(voltling);
+		actorStage.addActor(voltling);
+		log.debug("actorStage size now {}.", actorStage.getActors().size);
 	}
 
 	public void updateVoltlings() {

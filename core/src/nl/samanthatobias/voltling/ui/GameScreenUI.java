@@ -22,20 +22,27 @@ public class GameScreenUI {
 	private final GameScreenActions gameScreenActions;
 	private final TowerPlacementController towerPlacementController;
 	private final Stage buttonStage;
-	private final Skin skin;
+	private final Skin buttonSkin;
+
 	private final Label livesLabel;
+	private final Label waveLabel;
 	private final TextButton playPauseButton;
 	private final TextButton exitButton;
 	private final TextButton placeTowerButton;
 	private final TextButton cancelPlaceTowerButton;
 
-	public GameScreenUI(GameScreenActions gameScreenActions, GameStateActions gameStateActions, Stage buttonStage, Skin skin,
-						int startingLives) {
+	private final int waveAmount;
+
+	public GameScreenUI(GameScreenActions gameScreenActions, GameStateActions gameStateActions, Stage buttonStage, Skin buttonSkin,
+						int startingLives, int waveAmount) {
 		this.gameScreenActions = gameScreenActions;
 		this.towerPlacementController = new TowerPlacementController(gameStateActions);
 		this.buttonStage = buttonStage;
-		this.skin = skin;
+		this.buttonSkin = buttonSkin;
+		this.waveAmount = waveAmount;
+
 		livesLabel = setupLivesLabel(startingLives);
+		waveLabel = setupWaveLabel();
 		playPauseButton = setupPlayPauseButton();
 		exitButton = setupExitButton();
 		placeTowerButton = setupTowerButton();
@@ -46,17 +53,30 @@ public class GameScreenUI {
 		livesLabel.setText("Lives: " + lives);
 	}
 
+	public void updateWaveLabel(int currentWaveIndex) {
+		waveLabel.setText("Wave: " + (currentWaveIndex+1) + "/" + waveAmount);
+	}
+
 	private Label setupLivesLabel(int startingLives) {
 		final Label label;
-		label = new Label("Lives: " + startingLives, skin);
+		label = new Label("Lives: " + startingLives, buttonSkin);
 		label.setPosition(10, buttonStage.getHeight() - label.getHeight() - 10);
+		buttonStage.addActor(label);
+		return label;
+	}
+
+	private Label setupWaveLabel() {
+		final Label label;
+		label = new Label("Wave: 1/" + waveAmount, buttonSkin);
+		label.setPosition(10 + livesLabel.getX() + livesLabel.getWidth(),
+				buttonStage.getHeight() - label.getHeight() - 10);
 		buttonStage.addActor(label);
 		return label;
 	}
 
 	private TextButton setupExitButton() {
 		final TextButton button;
-		button = new TextButton("Exit", skin);
+		button = new TextButton("Exit", buttonSkin);
 		button.setPosition(buttonStage.getWidth() - button.getWidth() - 10, playPauseButton.getHeight() + 20);
 		button.addListener(new ClickListener() {
 			@Override
@@ -70,7 +90,7 @@ public class GameScreenUI {
 
 	private TextButton setupPlayPauseButton() {
 		final TextButton button;
-		button = new TextButton("Play", skin);
+		button = new TextButton("Play", buttonSkin);
 		button.setPosition(buttonStage.getWidth() - button.getWidth() - 10, 10);
 		button.addListener(new ClickListener() {
 			@Override
@@ -85,7 +105,7 @@ public class GameScreenUI {
 
 	private TextButton setupTowerButton() {
 		final TextButton button;
-		button = new TextButton("Tower", skin);
+		button = new TextButton("Tower", buttonSkin);
 		button.setPosition(buttonStage.getWidth() - button.getWidth() - 10, buttonStage.getHeight() - 10 - button.getHeight());
 		button.addListener(new ChangeListener() {
 			@Override
@@ -104,7 +124,7 @@ public class GameScreenUI {
 
 	private TextButton setupCancelPlaceTowerButton() {
 		final TextButton button;
-		button = new TextButton("Cancel", skin);
+		button = new TextButton("Cancel", buttonSkin);
 		button.setPosition(buttonStage.getWidth() - button.getWidth() - 10, 10);
 		button.setVisible(false);
 		button.addListener(new ChangeListener() {
@@ -144,4 +164,5 @@ public class GameScreenUI {
 	public void dispose() {
 		towerPlacementController.disposeOfPlacingTower();
 	}
+
 }

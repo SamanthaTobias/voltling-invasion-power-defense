@@ -1,9 +1,10 @@
 package nl.samanthatobias.voltling.voltling;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 
 import nl.samanthatobias.voltling.level.PathActions;
@@ -15,26 +16,39 @@ public class Voltling extends Actor {
 
 	private static final Logger log = createLogger(Voltling.class);
 
-	private final PathActions pathActions;
-	private final Label sprite;
-	private final Vector2 position;
+	private final Sprite sprite;
+	private final Texture texture;
 	private final int power;
 	private final int speed;
 
+	private boolean placed = false;
+	private boolean alive = true;
+	private PathActions pathActions;
+	private Vector2 position;
 	private int pathIndex = 0;
 
-	public Voltling(PathActions pathActions, String name, int power, int speed, Label sprite) {
-		this.pathActions = pathActions;
+	public Voltling(String name, int power, int speed, Texture texture, int size) {
 		setName(name);
-		this.position = pathActions.getStartPoint();
-		this.sprite = sprite;
-		sprite.setPosition(position.x, position.y);
+		this.sprite = new Sprite(texture);
+		sprite.setSize(size, size);
+		this.texture = texture;
 		this.power = power;
 		this.speed = speed;
 	}
 
+	public void place(PathActions path) {
+		if (placed) {
+			throw new IllegalStateException("Already placed.");
+		}
+		pathActions = path;
+		position = pathActions.getStartPoint();
+		sprite.setPosition(position.x, position.y);
+		placed = true;
+	}
+
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
+		super.draw(batch, parentAlpha);
 		sprite.draw(batch, parentAlpha);
 	}
 
@@ -52,7 +66,6 @@ public class Voltling extends Actor {
 			updatePosition(dx, dy);
 
 			if (position.dst2(nextPoint) < (dx * dx + dy * dy)) {
-				log.debug("Voltling reached next point.");
 				position.set(nextPoint);
 				pathIndex++;
 			}
@@ -61,7 +74,7 @@ public class Voltling extends Actor {
 
 	@Override
 	public boolean remove() {
-		sprite.remove();
+		alive = false;
 		return super.remove();
 	}
 
@@ -87,6 +100,17 @@ public class Voltling extends Actor {
 
 	public int getPower() {
 		return power;
+	}
+
+	public boolean isAlive() {
+		if (alive && !placed) {
+			throw new IllegalStateException();
+		}
+		return alive;
+	}
+
+	public Voltling clone() {
+		return new Voltling(getName(), power, speed, texture, 32);
 	}
 
 }

@@ -16,7 +16,7 @@ public class LevelSelectScreen extends Screen {
 		level1Button.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				game.setScreen(new GameScreen(game));
+				game.setScreen(new GameScreen(game, "ONE"));
 			}
 		});
 		buttonStage.addActor(level1Button);
