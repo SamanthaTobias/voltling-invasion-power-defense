@@ -41,11 +41,20 @@ public class Config {
 			throw new IllegalStateException("Log level already set.");
 		}
 		switch (LOG_LEVEL.toLowerCase()) {
-			case "debug" -> Gdx.app.setLogLevel(Application.LOG_DEBUG);
-			case "info" -> Gdx.app.setLogLevel(Application.LOG_INFO);
-			case "error" -> Gdx.app.setLogLevel(Application.LOG_ERROR);
-			case "none" -> Gdx.app.setLogLevel(Application.LOG_NONE);
-			default -> throw new IllegalStateException("Invalid log level: " + LOG_LEVEL);
+			case "debug":
+				Gdx.app.setLogLevel(Application.LOG_DEBUG);
+				break;
+			case "info":
+				Gdx.app.setLogLevel(Application.LOG_INFO);
+				break;
+			case "error":
+				Gdx.app.setLogLevel(Application.LOG_ERROR);
+				break;
+			case "none":
+				Gdx.app.setLogLevel(Application.LOG_NONE);
+				break;
+			default:
+				throw new IllegalStateException("Invalid log level: " + LOG_LEVEL);
 		}
 		logLevelSet = true;
 	}
